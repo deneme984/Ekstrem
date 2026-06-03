@@ -5,6 +5,10 @@
  * Uses process.stdout/stderr (no bare console.log) so output can be piped
  * and filtered by log level via the LOG_LEVEL environment variable.
  *
+ * SECURITY: The logger automatically redacts sensitive keys (tokens, TCKN,
+ * passwords, secrets) from all context objects before they reach any output
+ * stream. Callers must NEVER pass raw token values as the message string.
+ *
  * In production this should be replaced with a proper logger (e.g. winston/pino).
  */
 
@@ -19,9 +23,46 @@ const CURRENT_LEVEL = LOG_LEVELS[process.env.LOG_LEVEL?.toLowerCase()] ?? LOG_LE
  * @param {Object} [context]
  * @returns {string}
  */
+/**
+ * Keys that must NEVER appear in log output.
+ * This acts as a defence-in-depth safety net; callers should still avoid
+ * passing these values in the first place.
+ */
+const SENSITIVE_KEYS = new Set([
+  'token', 'accessToken', 'access_token',
+  'refreshToken', 'refresh_token',
+  'code', 'tckn', 'password',
+  'secret', 'clientSecret', 'client_secret',
+  'authorization',
+]);
+
+/**
+ * Returns a shallow copy of the context object with sensitive values redacted.
+ *
+ * @param {Object|undefined} context
+ * @returns {Object|undefined}
+ */
+function sanitize(context) {
+  if (!context || typeof context !== 'object') return context;
+  const safe = { ...context };
+  for (const key of Object.keys(safe)) {
+    if (SENSITIVE_KEYS.has(key)) safe[key] = '[REDACTED]';
+  }
+  return safe;
+}
+
+/**
+ * Format a log entry to a structured string.
+ *
+ * @param {string} level
+ * @param {string} message
+ * @param {Object} [context]
+ * @returns {string}
+ */
 function format(level, message, context) {
-  const ts = new Date().toISOString();
-  const ctx = context ? ` ${JSON.stringify(context)}` : '';
+  const ts  = new Date().toISOString();
+  const safe = sanitize(context);
+  const ctx  = safe ? ` ${JSON.stringify(safe)}` : '';
   return `[${ts}] [${level.toUpperCase()}] ${message}${ctx}`;
 }
 
