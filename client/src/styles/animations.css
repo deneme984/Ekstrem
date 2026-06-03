@@ -1,0 +1,420 @@
+/* ============================================================
+   EKSTREM — Micro-Animations Library
+   animations.css — All motion primitives and utility classes
+   ============================================================ */
+
+/* ── Keyframe Definitions ──────────────────────────────────── */
+
+/* Fade In Up — for cards and list items appearing */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade In — simple opacity reveal */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Fade Out Down — for cards dismissing */
+@keyframes fadeOutDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+
+/* Slide In From Right — screen-level navigation transition */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide Out To Left — screen exit */
+@keyframes slideOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30%);
+  }
+}
+
+/* Slide In From Bottom — bottom sheet entrance */
+@keyframes slideInBottom {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide Out To Bottom */
+@keyframes slideOutBottom {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}
+
+/* Scale In — modal / popover entrance */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Pulse Glow — payment countdown urgency indicator */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 59, 48, 0);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255, 59, 48, 0.15),
+                0 0 24px rgba(255, 59, 48, 0.30);
+    opacity: 0.85;
+  }
+}
+
+/* Pulse Glow Green — positive state indicator */
+@keyframes pulseGlowGreen {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 200, 83, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(0, 200, 83, 0.12),
+                0 0 20px rgba(0, 200, 83, 0.25);
+  }
+}
+
+/* Pulse — simple opacity pulse for loading dots */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Shimmer — skeleton loading effect */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Skeleton Wave — ripple shimmer variant */
+@keyframes skeletonWave {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Spring Bounce — donut chart / metric entry */
+@keyframes springBounce {
+  0%   { transform: scale(0); opacity: 0; }
+  55%  { transform: scale(1.08); opacity: 1; }
+  75%  { transform: scale(0.95); }
+  90%  { transform: scale(1.02); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Spring In Up — for metric cards staggered entry */
+@keyframes springInUp {
+  0%   { transform: translateY(32px) scale(0.96); opacity: 0; }
+  60%  { transform: translateY(-6px) scale(1.01); opacity: 1; }
+  80%  { transform: translateY(3px) scale(0.99); }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+/* Button Press — scale down on tap */
+@keyframes buttonPress {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(0.94); }
+  100% { transform: scale(1); }
+}
+
+/* Tick Checkmark — success confirmation */
+@keyframes tickIn {
+  0%   { stroke-dashoffset: 40; opacity: 0; }
+  60%  { opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 1; }
+}
+
+/* Number Counter — values animating in (handled via CSS custom props + JS) */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Rotate — loading spinners */
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Progress Fill — progress bar / ring fill animation */
+@keyframes progressFill {
+  from { stroke-dashoffset: var(--dash-total, 283); }
+  to   { stroke-dashoffset: var(--dash-offset, 0); }
+}
+
+/* Stagger Fade — for list items loading in sequence */
+@keyframes staggerFade {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ── Animation Utility Classes ─────────────────────────────── */
+
+/* Fade In Up */
+.animate-fade-in-up {
+  animation: fadeInUp var(--transition-decelerate) both;
+}
+
+/* Stagger children fade-in-up (add .stagger-* class to parent) */
+.stagger-children > * {
+  animation: fadeInUp 0.35s cubic-bezier(0.00, 0.00, 0.20, 1.00) both;
+}
+.stagger-children > *:nth-child(1)  { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2)  { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3)  { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4)  { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5)  { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6)  { animation-delay: 300ms; }
+.stagger-children > *:nth-child(7)  { animation-delay: 360ms; }
+.stagger-children > *:nth-child(8)  { animation-delay: 420ms; }
+.stagger-children > *:nth-child(9)  { animation-delay: 480ms; }
+.stagger-children > *:nth-child(10) { animation-delay: 540ms; }
+
+/* Slide In Right (screen transition) */
+.animate-slide-in-right {
+  animation: slideInRight 0.35s var(--transition-decelerate) both;
+}
+
+/* Slide In Bottom (bottom sheet) */
+.animate-slide-in-bottom {
+  animation: slideInBottom 0.40s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+/* Scale In (modal) */
+.animate-scale-in {
+  animation: scaleIn 0.25s var(--transition-decelerate) both;
+}
+
+/* Fade In */
+.animate-fade-in {
+  animation: fadeIn var(--transition-normal) both;
+}
+
+/* Spring Bounce (chart entry) */
+.animate-spring-bounce {
+  animation: springBounce var(--transition-spring) both;
+}
+
+/* Spring In Up */
+.animate-spring-up {
+  animation: springInUp 0.50s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* Count Up (number reveal) */
+.animate-count-up {
+  animation: countUp 0.30s ease both;
+}
+
+/* Stagger Fade (list items) */
+.animate-stagger-fade {
+  animation: staggerFade 0.30s ease both;
+}
+
+/* ── Pulse Glow States ─────────────────────────────────────── */
+.pulse-danger {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+.pulse-success {
+  animation: pulseGlowGreen 2.5s ease-in-out infinite;
+}
+.pulse-opacity {
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+/* ── Skeleton Loading ──────────────────────────────────────── */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-card-elevated);
+  border-radius: var(--radius-md);
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* Skeleton shape helpers */
+.skeleton-text {
+  height: 1em;
+  border-radius: var(--radius-full);
+}
+.skeleton-text-sm {
+  height: 0.75em;
+  border-radius: var(--radius-full);
+}
+.skeleton-circle {
+  border-radius: var(--radius-full);
+}
+.skeleton-card {
+  height: 100%;
+  min-height: 80px;
+  border-radius: var(--radius-lg);
+}
+
+/* ── Shimmer Effect (standalone) ───────────────────────────── */
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--bg-card) 0%,
+    var(--bg-card-elevated) 50%,
+    var(--bg-card) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* ── Button Press Feedback ─────────────────────────────────── */
+.press-feedback {
+  transition: transform var(--transition-fast),
+              opacity var(--transition-fast);
+  will-change: transform;
+}
+
+.press-feedback:active {
+  transform: scale(0.94);
+  opacity: 0.85;
+}
+
+/* Heavier press for primary CTAs */
+.press-feedback-heavy:active {
+  transform: scale(0.90);
+  opacity: 0.80;
+}
+
+/* Subtle press for cards */
+.press-feedback-subtle:active {
+  transform: scale(0.97);
+  opacity: 0.90;
+}
+
+/* ── Loading Spinner ───────────────────────────────────────── */
+.spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-subtle);
+  border-top-color: var(--color-primary);
+  border-radius: var(--radius-full);
+  animation: rotate 0.7s linear infinite;
+}
+
+.spinner-sm {
+  width: 14px;
+  height: 14px;
+  border-width: 1.5px;
+}
+
+.spinner-lg {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+}
+
+/* ── Transition Helpers ────────────────────────────────────── */
+.transition-all     { transition: all var(--transition-normal); }
+.transition-fast    { transition: all var(--transition-fast); }
+.transition-slow    { transition: all var(--transition-slow); }
+.transition-opacity { transition: opacity var(--transition-normal); }
+.transition-transform { transition: transform var(--transition-normal); }
+.transition-colors  {
+  transition: color var(--transition-fast),
+              background-color var(--transition-fast),
+              border-color var(--transition-fast);
+}
+
+/* ── Delay Utilities ───────────────────────────────────────── */
+.delay-0   { animation-delay: 0ms; }
+.delay-100 { animation-delay: 100ms; }
+.delay-200 { animation-delay: 200ms; }
+.delay-300 { animation-delay: 300ms; }
+.delay-400 { animation-delay: 400ms; }
+.delay-500 { animation-delay: 500ms; }
+.delay-600 { animation-delay: 600ms; }
+.delay-800 { animation-delay: 800ms; }
+
+/* ── Page Transition Wrappers ──────────────────────────────── */
+.page-enter {
+  animation: slideInRight 0.30s cubic-bezier(0.00, 0.00, 0.20, 1.00) both;
+}
+
+.page-exit {
+  animation: slideOutLeft 0.25s cubic-bezier(0.40, 0.00, 1.00, 1.00) both;
+}
+
+.sheet-enter {
+  animation: slideInBottom 0.40s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+.sheet-exit {
+  animation: slideOutBottom 0.28s cubic-bezier(0.40, 0.00, 1.00, 1.00) both;
+}
+
+.overlay-enter {
+  animation: fadeIn 0.20s ease both;
+}
+
+.overlay-exit {
+  animation: fadeIn 0.15s ease both reverse;
+}

@@ -1,0 +1,11 @@
+{
+  "name": "ekstrem",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "client": "cd client && npm run dev",
+    "server": "cd server && npm run dev",
+    "dev": "start npm run client && start npm run server",
+    "install:all": "cd client && npm install && cd ../server && npm install"
+  }
+}
