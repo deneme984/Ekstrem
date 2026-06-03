@@ -1,0 +1,110 @@
+/* ── MetricCard ────────────────────────────────────────────────────── */
+
+.metric-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-fast),
+              transform var(--transition-fast),
+              opacity var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.metric-card:active {
+  transform: scale(0.94);
+  opacity: 0.85;
+}
+
+/* Variant borders */
+.metric-card--danger  { border-color: rgba(255, 59, 48, 0.30); }
+.metric-card--warning { border-color: rgba(255, 149, 0, 0.28); }
+.metric-card--success { border-color: rgba(0, 200, 83, 0.25); }
+
+/* Subtle tint overlays */
+.metric-card--danger::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top left, rgba(255, 59, 48, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.metric-card--warning::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top left, rgba(255, 149, 0, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.metric-card--success::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at top left, rgba(0, 200, 83, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Icon ─────────────────────────────────────────────────────────── */
+.metric-card__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  margin-bottom: 2px;
+}
+
+.metric-card--danger  .metric-card__icon { background: var(--color-danger-dim); color: var(--color-danger); }
+.metric-card--warning .metric-card__icon { background: var(--color-warning-dim); color: var(--color-warning); }
+.metric-card--success .metric-card__icon { background: var(--color-primary-dim); color: var(--color-primary); }
+
+/* ── Label ────────────────────────────────────────────────────────── */
+.metric-card__label {
+  font-size: var(--font-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+/* ── Value ────────────────────────────────────────────────────────── */
+.metric-card__value {
+  font-size: var(--font-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  word-break: break-all;
+}
+
+.metric-card--danger  .metric-card__value { color: var(--color-danger); }
+.metric-card--warning .metric-card__value { color: var(--color-warning); }
+.metric-card--success .metric-card__value { color: var(--color-primary); }
+
+/* ── Sub-label ────────────────────────────────────────────────────── */
+.metric-card__sub {
+  font-size: var(--font-small);
+  color: var(--text-tertiary);
+  line-height: var(--line-height-snug);
+  margin-top: auto;
+  padding-top: 2px;
+}
+
+/* ── Skeleton ─────────────────────────────────────────────────────── */
+.metric-card--skeleton {
+  min-height: 100px;
+  pointer-events: none;
+}

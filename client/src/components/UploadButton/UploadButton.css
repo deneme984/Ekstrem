@@ -1,0 +1,149 @@
+/* ── UploadButton ─────────────────────────────────────────────────── */
+
+.upload-btn-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+/* Main CTA button */
+.upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  background: var(--color-primary);
+  color: #000;
+  border-radius: var(--radius-lg);
+  font-size: var(--font-body);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  border: none;
+  transition: transform var(--transition-fast),
+              opacity var(--transition-fast),
+              box-shadow var(--transition-fast);
+  box-shadow: var(--shadow-primary-glow);
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-btn::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.upload-btn:active {
+  transform: scale(0.95);
+  opacity: 0.88;
+}
+
+.upload-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Loading / success variants */
+.upload-btn--loading {
+  background: var(--color-primary);
+  pointer-events: none;
+}
+
+.upload-btn--success {
+  background: var(--color-primary);
+}
+
+/* ── Options sheet ────────────────────────────────────────────────── */
+.upload-options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  animation: fadeInUp 0.25s cubic-bezier(0.00, 0.00, 0.20, 1.00) both;
+}
+
+.upload-option-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background var(--transition-fast),
+              transform var(--transition-fast),
+              opacity var(--transition-fast);
+  -webkit-tap-highlight-color: transparent;
+  text-align: left;
+}
+
+.upload-option-btn:active {
+  transform: scale(0.97);
+  opacity: 0.85;
+  background: var(--glass-bg-hover);
+}
+
+.upload-option-btn__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.upload-option-btn__icon--gmail {
+  background: rgba(234, 67, 53, 0.15);
+  color: #ea4335;
+}
+
+.upload-option-btn__icon--pdf {
+  background: var(--color-primary-dim);
+  color: var(--color-primary);
+}
+
+.upload-option-btn__text {
+  flex: 1;
+}
+
+.upload-option-btn__label {
+  font-size: var(--font-body-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  display: block;
+}
+
+.upload-option-btn__desc {
+  font-size: var(--font-caption);
+  color: var(--text-tertiary);
+  display: block;
+  margin-top: 2px;
+}
+
+/* ── Spinner ──────────────────────────────────────────────────────── */
+.upload-btn__spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.25);
+  border-top-color: #000;
+  border-radius: var(--radius-full);
+  animation: rotate 0.7s linear infinite;
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
