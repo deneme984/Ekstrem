@@ -1,0 +1,243 @@
+/* ============================================================
+   EKSTREM — Typography System
+   typography.css — Font utilities, text helpers, number formatters
+   ============================================================ */
+
+/* ── Font Face Fallback (if Google Fonts offline) ──────────── */
+/* Primary import is in index.css via Google Fonts CDN */
+
+/* ── Heading Scale ─────────────────────────────────────────── */
+.text-hero {
+  font-size: var(--font-hero);
+  font-weight: var(--font-weight-heavy);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.text-display {
+  font-size: var(--font-display);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--text-primary);
+}
+
+.text-h1 {
+  font-size: var(--font-h1);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-snug);
+  letter-spacing: var(--letter-spacing-tight);
+  color: var(--text-primary);
+}
+
+.text-h2 {
+  font-size: var(--font-h2);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.text-h3 {
+  font-size: var(--font-h3);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  color: var(--text-primary);
+}
+
+/* ── Body Text ─────────────────────────────────────────────── */
+.text-body {
+  font-size: var(--font-body);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+}
+
+.text-body-medium {
+  font-size: var(--font-body);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+}
+
+.text-body-sm {
+  font-size: var(--font-body-sm);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--text-secondary);
+}
+
+/* ── Caption & Label ───────────────────────────────────────── */
+.text-caption {
+  font-size: var(--font-caption);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-snug);
+  color: var(--text-secondary);
+}
+
+.text-caption-medium {
+  font-size: var(--font-caption);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  color: var(--text-secondary);
+}
+
+.text-small {
+  font-size: var(--font-small);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  color: var(--text-tertiary);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.text-label {
+  font-size: var(--font-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+/* ── Amount / Currency Formatting ─────────────────────────── */
+/* All amounts use tabular numbers for alignment */
+.amount-large {
+  font-size: var(--font-hero);
+  font-weight: var(--font-weight-heavy);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+.amount-medium {
+  font-size: var(--font-h1);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-tight);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+.amount-small {
+  font-size: var(--font-h3);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-snug);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+.amount-caption {
+  font-size: var(--font-caption);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-snug);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* Currency symbol (₺) positioning */
+.amount-currency {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.amount-currency .currency-symbol {
+  font-size: 0.55em;
+  font-weight: var(--font-weight-semibold);
+  opacity: 0.7;
+  letter-spacing: 0;
+  align-self: flex-start;
+  margin-top: 0.15em;
+}
+
+.amount-currency .currency-decimal {
+  font-size: 0.55em;
+  font-weight: var(--font-weight-semibold);
+  opacity: 0.7;
+  align-self: flex-end;
+  margin-bottom: 0.05em;
+}
+
+/* ── Text Color Utilities ──────────────────────────────────── */
+.text-primary-color   { color: var(--text-primary) !important; }
+.text-secondary-color { color: var(--text-secondary) !important; }
+.text-tertiary-color  { color: var(--text-tertiary) !important; }
+
+.text-danger     { color: var(--color-danger) !important; }
+.text-positive   { color: var(--color-primary) !important; }
+.text-warning    { color: var(--color-warning) !important; }
+.text-info       { color: var(--color-info) !important; }
+.text-purple     { color: var(--color-purple) !important; }
+
+/* Semantic amount colors */
+.amount-danger   { color: var(--text-amount-danger) !important; }
+.amount-positive { color: var(--text-amount-positive) !important; }
+.amount-neutral  { color: var(--text-amount-neutral) !important; }
+
+/* Category text colors */
+.text-cat-market  { color: var(--cat-market); }
+.text-cat-online  { color: var(--cat-online); }
+.text-cat-yemek   { color: var(--cat-yemek); }
+.text-cat-ulasim  { color: var(--cat-ulasim); }
+.text-cat-eglence { color: var(--cat-eglence); }
+.text-cat-saglik  { color: var(--cat-saglik); }
+.text-cat-giyim   { color: var(--cat-giyim); }
+.text-cat-diger   { color: var(--cat-diger); }
+
+/* ── Font Weight Utilities ─────────────────────────────────── */
+.font-regular  { font-weight: var(--font-weight-regular) !important; }
+.font-medium   { font-weight: var(--font-weight-medium) !important; }
+.font-semibold { font-weight: var(--font-weight-semibold) !important; }
+.font-bold     { font-weight: var(--font-weight-bold) !important; }
+.font-heavy    { font-weight: var(--font-weight-heavy) !important; }
+
+/* ── Alignment & Decoration Utilities ─────────────────────── */
+.text-left    { text-align: left; }
+.text-center  { text-align: center; }
+.text-right   { text-align: right; }
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.text-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.text-nowrap { white-space: nowrap; }
+
+/* ── Number / Tabular Utilities ────────────────────────────── */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+.lining-nums {
+  font-variant-numeric: lining-nums;
+  font-feature-settings: 'lnum' 1;
+}
+
+/* ── Turkish Number Format Suffix ─────────────────────────── */
+/* Usage: <span class="tr-amount">12.450<span class="tr-tl">₺</span></span> */
+.tr-amount {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+.tr-tl {
+  font-size: 0.65em;
+  font-weight: var(--font-weight-medium);
+  opacity: 0.75;
+  margin-left: 1px;
+  vertical-align: super;
+  line-height: 0;
+}
