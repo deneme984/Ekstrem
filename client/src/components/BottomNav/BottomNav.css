@@ -1,0 +1,70 @@
+/* BottomNav.css — Additional styles on top of .bottom-nav-bar from components.css */
+
+/* Smooth icon color and transform transition */
+.bottom-nav-item svg {
+  transition: color var(--transition-fast),
+              transform var(--transition-fast);
+  color: inherit;
+}
+
+/* Active item: icon lifts slightly */
+.bottom-nav-item.active svg {
+  transform: translateY(-1px);
+}
+
+/* Label transitions */
+.bottom-nav-label {
+  transition: color var(--transition-fast),
+              opacity var(--transition-fast);
+  opacity: 0.5;
+}
+
+.bottom-nav-item.active .bottom-nav-label {
+  opacity: 1;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Active indicator: animated green pill line above icon */
+.bottom-nav-item.active::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 2px;
+  border-radius: 0 0 var(--radius-full) var(--radius-full);
+  background: var(--color-primary);
+  box-shadow: var(--shadow-primary-glow);
+  animation: navIndicatorIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes navIndicatorIn {
+  from {
+    width: 0;
+    opacity: 0;
+  }
+  to {
+    width: 24px;
+    opacity: 1;
+  }
+}
+
+/* Each nav item needs relative positioning for the ::before indicator */
+.bottom-nav-item {
+  position: relative;
+}
+
+/* Press scale override with smoother feel */
+.bottom-nav-item:active {
+  transform: scale(0.88);
+  opacity: 0.75;
+}
+
+/* Custom focus outline */
+.bottom-nav-item:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
