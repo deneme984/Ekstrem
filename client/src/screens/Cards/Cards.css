@@ -1,0 +1,382 @@
+/* ── Cards Screen ──────────────────────────────────────────────── */
+.cards-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ── Header ────────────────────────────────────────────────────── */
+.cards-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  flex-shrink: 0;
+}
+
+.cards-header-title {
+  font-size: var(--font-h2);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.cards-header-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: background var(--transition-fast);
+}
+
+.cards-header-icon:active {
+  background: var(--glass-bg-hover);
+}
+
+/* ── Scrollable content ────────────────────────────────────────── */
+.cards-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+/* ── Detail section (below carousel) ──────────────────────────── */
+.cards-detail {
+  padding: 0 var(--space-lg) var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  animation: fadeInUp 0.30s cubic-bezier(0.00, 0.00, 0.20, 1.00) both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Detail button ─────────────────────────────────────────────── */
+.cards-detail-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  width: 100%;
+  height: 46px;
+  border-radius: var(--radius-lg);
+  background: var(--color-primary);
+  color: #000;
+  font-size: var(--font-body-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.01em;
+  border: none;
+  cursor: pointer;
+  transition: opacity var(--transition-fast),
+              transform var(--transition-fast);
+  box-shadow: var(--shadow-primary-glow);
+}
+
+.cards-detail-btn:active {
+  transform: scale(0.97);
+  opacity: 0.88;
+}
+
+/* ── Balance + ring row ────────────────────────────────────────── */
+.cards-balance-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  gap: var(--space-md);
+}
+
+.cards-balance-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.cards-balance-label {
+  font-size: var(--font-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cards-balance-amount {
+  font-size: var(--font-display);
+  font-weight: var(--font-weight-heavy);
+  color: var(--text-primary);
+  letter-spacing: var(--letter-spacing-tight);
+  line-height: 1.1;
+}
+
+.cards-balance-limit {
+  font-size: var(--font-caption);
+  color: var(--text-tertiary);
+  line-height: 1.2;
+}
+
+/* ── Due date badge ────────────────────────────────────────────── */
+.cards-due-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+  font-size: var(--font-caption);
+  font-weight: var(--font-weight-semibold);
+}
+
+.cards-due-badge--normal {
+  background: var(--color-warning-dim);
+  color: var(--color-warning);
+  border: 1px solid rgba(255, 149, 0, 0.20);
+}
+
+.cards-due-badge--urgent {
+  background: var(--color-danger-dim);
+  color: var(--color-danger);
+  border: 1px solid rgba(255, 59, 48, 0.20);
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: none; }
+  50%       { box-shadow: 0 0 12px var(--color-danger-dim); }
+}
+
+.cards-due-badge--ok {
+  background: rgba(0, 200, 83, 0.10);
+  color: var(--color-primary);
+  border: 1px solid rgba(0, 200, 83, 0.18);
+}
+
+/* ── Quick stat chips ──────────────────────────────────────────── */
+.cards-chips {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.cards-chip {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px var(--space-sm);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  text-align: center;
+  min-width: 0;
+}
+
+.cards-chip-value {
+  font-size: var(--font-body-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.cards-chip-label {
+  font-size: 10px;
+  color: var(--text-tertiary);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* ── Transactions section ──────────────────────────────────────── */
+.cards-transactions {
+  padding: 0 var(--space-lg) var(--space-lg);
+}
+
+.cards-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-sm);
+}
+
+.cards-section-title {
+  font-size: var(--font-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.cards-section-link {
+  font-size: var(--font-caption);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.cards-tx-list {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 0 var(--space-md);
+}
+
+/* ── Skeleton items ────────────────────────────────────────────── */
+.cards-skeleton-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.cards-skeleton-item:last-child {
+  border-bottom: none;
+}
+
+.cards-skeleton-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.cards-skeleton-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cards-skeleton-line {
+  height: 13px;
+  border-radius: var(--radius-full);
+}
+
+.cards-skeleton-line--short {
+  width: 55%;
+  height: 10px;
+}
+
+/* ── Empty state for transactions ──────────────────────────────── */
+.cards-tx-empty {
+  text-align: center;
+  padding: var(--space-xl) var(--space-md);
+  color: var(--text-tertiary);
+  font-size: var(--font-caption);
+  font-weight: var(--font-weight-medium);
+}
+
+.cards-tx-empty-icon {
+  font-size: 2rem;
+  opacity: 0.35;
+  margin-bottom: var(--space-sm);
+}
+
+/* ── Empty screen (no cards at all) ───────────────────────────── */
+.cards-empty-screen {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  padding: var(--space-2xl) var(--space-xl);
+  text-align: center;
+}
+
+.cards-empty-illustration {
+  width: 100px;
+  height: 64px;
+  position: relative;
+  margin-bottom: var(--space-sm);
+}
+
+.cards-empty-card {
+  position: absolute;
+  width: 80px;
+  height: 50px;
+  border-radius: 8px;
+  border: 2px solid var(--border-medium);
+}
+
+.cards-empty-card--back {
+  background: var(--bg-card-elevated);
+  top: 0;
+  left: 10px;
+  transform: rotate(-8deg);
+}
+
+.cards-empty-card--front {
+  background: var(--bg-card);
+  top: 6px;
+  left: 0;
+  transform: rotate(5deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cards-empty-card-plus {
+  font-size: 18px;
+  color: var(--color-primary);
+  opacity: 0.7;
+}
+
+.cards-empty-title {
+  font-size: var(--font-h3);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.cards-empty-sub {
+  font-size: var(--font-caption);
+  color: var(--text-tertiary);
+  max-width: 240px;
+  line-height: var(--line-height-relaxed);
+}
+
+.cards-empty-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  height: 46px;
+  padding: 0 var(--space-xl);
+  border-radius: var(--radius-lg);
+  background: var(--color-primary);
+  color: #000;
+  font-size: var(--font-body-sm);
+  font-weight: var(--font-weight-bold);
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-primary-glow);
+  transition: opacity var(--transition-fast),
+              transform var(--transition-fast);
+  margin-top: var(--space-sm);
+}
+
+.cards-empty-btn:active {
+  transform: scale(0.97);
+  opacity: 0.88;
+}
+
+/* ── Bottom padding for nav bar ────────────────────────────────── */
+.cards-bottom-pad {
+  height: calc(var(--bottom-nav-height) + var(--space-lg));
+  flex-shrink: 0;
+}

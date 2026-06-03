@@ -1,0 +1,312 @@
+/* ── CardCarousel ──────────────────────────────────────────────── */
+.card-carousel-root {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Horizontal scroll track */
+.card-carousel-track {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+  /* Let cards peek from edges */
+  scroll-padding-left: var(--space-lg);
+}
+
+.card-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Individual credit card slot ──────────────────────────────── */
+.card-slot {
+  scroll-snap-align: center;
+  flex-shrink: 0;
+  /* Standard credit card aspect ratio 85.6mm × 53.98mm = 1.586 */
+  width: calc(100% - var(--space-2xl));
+  aspect-ratio: 1.586 / 1;
+  transition: transform var(--transition-normal),
+              opacity var(--transition-normal);
+  will-change: transform, opacity;
+  cursor: pointer;
+}
+
+.card-slot--active {
+  transform: scale(1.02);
+  opacity: 1;
+}
+
+.card-slot--inactive {
+  transform: scale(0.95);
+  opacity: 0.65;
+}
+
+/* ── Physical card visual ─────────────────────────────────────── */
+.credit-card {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  /* Default gradient – overridden by inline var */
+  background: linear-gradient(
+    135deg,
+    var(--card-color-start, #1a5f3a) 0%,
+    var(--card-color-end,   #0d3320) 100%
+  );
+  box-shadow: var(--shadow-elevated);
+  transition: box-shadow var(--transition-normal);
+  user-select: none;
+}
+
+/* Active glow ring */
+.card-slot--active .credit-card {
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.70),
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 4px 32px var(--card-glow, rgba(0, 200, 83, 0.30));
+}
+
+/* Subtle plastic sheen overlay */
+.credit-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.14) 0%,
+    rgba(255, 255, 255, 0.02) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Subtle noise/texture overlay */
+.credit-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.3;
+}
+
+/* ── Card inner content ───────────────────────────────────────── */
+.card-inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 20px 16px;
+}
+
+/* ── Top row: bank name + contactless ────────────────────────── */
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.card-bank-name {
+  font-size: var(--font-caption);
+  font-weight: var(--font-weight-bold);
+  color: rgba(255, 255, 255, 0.90);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  max-width: 60%;
+}
+
+.card-contactless {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.70);
+  line-height: 1;
+  transform: rotate(90deg);
+  letter-spacing: -4px;
+}
+
+/* ── Chip ─────────────────────────────────────────────────────── */
+.card-chip {
+  width: 36px;
+  height: 28px;
+  border-radius: 5px;
+  background: linear-gradient(
+    135deg,
+    #c9a84c 0%,
+    #f5d77e 30%,
+    #b8892a 60%,
+    #e8c860 80%,
+    #c9a84c 100%
+  );
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+  flex-shrink: 0;
+}
+
+/* Chip circuit lines */
+.card-chip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, transparent 32%, rgba(0,0,0,0.18) 32%, rgba(0,0,0,0.18) 34%, transparent 34%),
+    linear-gradient(90deg, transparent 66%, rgba(0,0,0,0.18) 66%, rgba(0,0,0,0.18) 68%, transparent 68%),
+    linear-gradient(0deg,  transparent 30%, rgba(0,0,0,0.18) 30%, rgba(0,0,0,0.18) 33%, transparent 33%),
+    linear-gradient(0deg,  transparent 67%, rgba(0,0,0,0.18) 67%, rgba(0,0,0,0.18) 70%, transparent 70%);
+}
+
+/* ── Middle row: chip ─────────────────────────────────────────── */
+.card-mid {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Bottom row: number + network ─────────────────────────────── */
+.card-bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card-product-name {
+  font-size: 9px;
+  font-weight: var(--font-weight-medium);
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+
+.card-bottom-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.card-number {
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 14px;
+  font-weight: var(--font-weight-bold);
+  color: rgba(255, 255, 255, 0.88);
+  letter-spacing: 0.18em;
+  line-height: 1;
+}
+
+/* ── Network logos ────────────────────────────────────────────── */
+.card-network {
+  font-weight: var(--font-weight-heavy);
+  line-height: 1;
+  font-style: italic;
+  white-space: nowrap;
+}
+
+.card-network--visa {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.90);
+  font-family: 'Georgia', serif;
+  letter-spacing: -0.02em;
+}
+
+.card-network--mastercard {
+  display: flex;
+  align-items: center;
+  gap: -4px;
+}
+
+.card-network--mastercard .mc-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+
+.card-network--mastercard .mc-circle--red {
+  background: #EB001B;
+  margin-right: -6px;
+}
+
+.card-network--mastercard .mc-circle--orange {
+  background: #F79E1B;
+  mix-blend-mode: screen;
+}
+
+.card-network--troy {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.90);
+  font-family: 'Inter', sans-serif;
+  font-weight: var(--font-weight-heavy);
+  letter-spacing: 0.08em;
+  border: 1.5px solid rgba(255,255,255,0.6);
+  padding: 2px 5px;
+  border-radius: 3px;
+}
+
+/* ── Pagination dots ──────────────────────────────────────────── */
+.card-carousel-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding-bottom: var(--space-sm);
+}
+
+.carousel-dot {
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.20);
+  transition: width var(--transition-normal),
+              background var(--transition-normal);
+  cursor: pointer;
+}
+
+.carousel-dot--active {
+  width: 20px;
+  background: var(--color-primary);
+}
+
+.carousel-dot--inactive {
+  width: 6px;
+  background: rgba(255, 255, 255, 0.20);
+}
+
+/* ── Empty state ──────────────────────────────────────────────── */
+.card-carousel-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-2xl) var(--space-lg);
+  margin: var(--space-md) var(--space-lg);
+  background: var(--bg-card);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  min-height: 180px;
+}
+
+.card-carousel-empty-icon {
+  font-size: 2.5rem;
+  opacity: 0.40;
+}
+
+.card-carousel-empty-title {
+  font-size: var(--font-h3);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-secondary);
+}
+
+.card-carousel-empty-sub {
+  font-size: var(--font-caption);
+  color: var(--text-tertiary);
+  max-width: 220px;
+  line-height: var(--line-height-relaxed);
+}
